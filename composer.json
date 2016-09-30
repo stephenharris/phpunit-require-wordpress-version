@@ -1,0 +1,22 @@
+{
+    "name": "stephenharris/phpunit-require-wordpress-version",
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*",
+        "inpsyde/monkery-test-case": "~2.0",
+        "brain/monkey": "~1.3",
+        "mockery/mockery": "~0.9"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stephen Harris",
+            "email": "contact@stephenharris.info"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "StephenHarris\\PHPUnit\\": "src"
+        }
+    }
+}
