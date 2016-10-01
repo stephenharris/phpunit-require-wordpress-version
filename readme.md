@@ -3,7 +3,7 @@
 This package provides a trait (to use in your test cases) so that you can run your
 phpunit tests for specific WordPress version:
 
-```
+```php
 class My_Test_Case extends WP_UnitTestCase {
 	use StephenHarris\PHPUnit\RequiresWordPressVersion;
 
@@ -12,7 +12,7 @@ class My_Test_Case extends WP_UnitTestCase {
 
 Then in your tests:
 
-```
+```php
 class My_Test extends My_Test_Case {
 
 	/**
@@ -22,7 +22,7 @@ class My_Test extends My_Test_Case {
 		 	// test will be skipped unless WordPress >= 4.4.0
 	 }
 
-}
+}-
 ```
 
 
@@ -55,7 +55,7 @@ Alternativevely you can directly edit your composer.json by adding:
 
 To use, simply add the `use` statement for the provided trait to your test case:
 
-```
+```php
 class My_Test_Case extends WP_UnitTestCase {
 	use StephenHarris\PHPUnit\RequiresWordPressVersion;
 
@@ -66,11 +66,11 @@ This trait overloads the `PHPUnit_Framework_TestCase::checkRequirements()`, if y
 already overloading `checkRequirements()` in your test case class then you can alias
 the method:
 
-```
+```php
 class My_Test_Case extends WP_UnitTestCase {
 	use StephenHarris\PHPUnit\RequiresWordPressVersion {
 		checkRequirements as checkWordPressVersionRequirements;
-  }
+	}
 
 	function checkRequirements() {
 		$this->checkWordPressVersionRequirements();
@@ -84,7 +84,7 @@ class My_Test_Case extends WP_UnitTestCase {
 If you are using multiple traits with the `checkRequirements()` method, then you will
 need to resolve the conflicts using aliases:
 
-```
+```php
 class My_Test_Case extends WP_UnitTestCase {
 	use StephenHarris\PHPUnit\RequiresWordPressVersion {
 		checkRequirements as checkWordPressVersionRequirements;
@@ -103,7 +103,7 @@ class My_Test_Case extends WP_UnitTestCase {
 
 ## Examples
 
-```
+```php
 class My_Test extends My_Test_Case {
 
 	/**
@@ -113,33 +113,33 @@ class My_Test extends My_Test_Case {
 		 	// test will be skipped unless WordPress >= 4.4.0
 	 }
 
- /**
-	* @requires WordPress >= 4.4.0-alpha-123
-	*/
-	function testSomethingRequiresAtLeast440alpha123() {
-		 // test will be skipped unless WordPress >= 4.4.0-alpha-123
-		 // also works if you specify 4.4-alpha-123 instead
-	}
+	/**
+	 * @requires WordPress >= 4.4.0-alpha-123
+	 */
+	 function testSomethingRequiresAtLeast440alpha123() {
+		 	// test will be skipped unless WordPress >= 4.4.0-alpha-123
+		 	// also works if you specify 4.4-alpha-123 instead
+	 }
 
 	/**
 	 * @requires WordPress > 4.6.2-rc-1
 	 */
 	 function testSomethingRequiresGreaterThan440() {
-			// test will be skipped unless WordPress version is greater than 4.6.2-rc-1
+	 	 // test will be skipped unless WordPress version is greater than 4.6.2-rc-1
 	 }
 
 	 /**
 		* @requires WordPress == 4.6.0
 		*/
 	 function testOnlyRunsForWordPress460() {
-			// test will only run with version 4.6.0
+	  // test will only run with version 4.6.0
 	 }
 
 	 /**
-		* @requires WordPress != 4.6
-		*/
+	  * @requires WordPress != 4.6
+	  */
 	 function testRSkippedIf460() {
-			// test will be skipped if WordPress version is 4.6.0
+	 	 // test will be skipped if WordPress version is 4.6.0
 	 }
 
 }
