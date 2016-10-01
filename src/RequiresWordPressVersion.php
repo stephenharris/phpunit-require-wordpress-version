@@ -51,7 +51,7 @@ trait RequiresWordPressVersion {
             );
 
             if ( $target['message'] ) {
-                $message .= "\n" . $target['message'];
+              $message .= "\n" . $target['message'];
             }
 
             $this->markTestSkipped( $message );
@@ -70,6 +70,11 @@ trait RequiresWordPressVersion {
       return $wp_version;
     }
 
+		/**
+		 * Adds a 0 patch version, if ommitted. E.g.
+		 * 4.5 --> 4.5.0
+		 * 4.5-alpha-123 --> 4.5.0-alpha-123
+		 */
 		protected function padVersion( $version ) {
 			$version = preg_replace( '/^(\d+\.\d+)(-.*)?$/', '$1.0$2', $version );
 			return $version;
