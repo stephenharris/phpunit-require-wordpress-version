@@ -1,7 +1,7 @@
 # @requires WordPress
 
 This package provides a trait (to use in your test cases) so that you can run your
-phpunit tests for specific WordPress version:
+phpunit tests for specific WordPress versions:
 
 ```php
 class My_Test_Case extends WP_UnitTestCase {
@@ -95,7 +95,7 @@ class My_Test_Case extends WP_UnitTestCase {
 
 	function checkRequirements() {
 		$this->checkWordPressVersionRequirements();
-		$this->checkWordPressVersionRequirements();
+		$this->checkSomeOtherRequirements();
 	}
 
 }
@@ -124,28 +124,64 @@ class My_Test extends My_Test_Case {
 	/**
 	 * @requires WordPress > 4.6.2-rc-1
 	 */
-	 function testSomethingRequiresGreaterThan440() {
+	 function testSomethingRequiresGreaterThan462ReleaseCandidate() {
 	 	 // test will be skipped unless WordPress version is greater than 4.6.2-rc-1
 	 }
 
-	 /**
-		* @requires WordPress == 4.6.0
-		*/
+	/**
+	 * @requires WordPress == 4.6.0
+	 */
 	 function testOnlyRunsForWordPress460() {
-	  // test will only run with version 4.6.0
+	 	 // test will only run with version 4.6.0
 	 }
 
-	 /**
-	  * @requires WordPress != 4.6
-	  */
-	 function testRSkippedIf460() {
-	 	 // test will be skipped if WordPress version is 4.6.0
-	 }
+	/**
+	 * @requires WordPress != 4.6
+	 */
+	function testSkippedIf460() {
+		// test will be skipped if WordPress version is 4.6.0
+	}
+
+	/**
+	 * @requires WordPress < 4.2-alpha-1234
+	 */
+	function testOnlyRunsForVersionsBefore42Alpha1234() {
+		// test will only run for WordPress versions strictly less than4.2-alpha-1234
+	}
+
+	/**
+	 * @requires WordPress <= 4.2.0
+	 */
+	function testOnlyRunsFor420AndEarlier() {
+		// test will only run for WordPress version 4.2.0 and earlier
+	}
 
 }
 ```
 
 ### Alternative syntax
+
+You use `@requires WordPress` with just a version number, and no operator:
+
+```php
+/**
+ * @requires WordPress 4.2.0
+ */
+```
+
+which means the test requires WordPress 4.2.0 or higher to run, and is otherwise
+skipped. Or you can specify an operator. E.g:
+
+```php
+/**
+ * @requires WordPress < 4.2.0
+ */
+```
+
+which means the test requires a WordPress version strictly before 4.2.0.
+
+The various operators supported are listed below. Also note, that you do not
+need to include the patch version number if it is 0.
 
 * WordPress greater than or equal to 4.4.0
   - WordPress 4.4
