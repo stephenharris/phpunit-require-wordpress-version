@@ -1,5 +1,6 @@
 {
     "name": "stephenharris/phpunit-require-wordpress-version",
+		"description": "Provides a trait to be used in your PHPUnit test cases to conditionally run tests based on the WordPress version",
     "require-dev": {
         "phpunit/phpunit": "4.8.*",
         "inpsyde/monkery-test-case": "~2.0",
