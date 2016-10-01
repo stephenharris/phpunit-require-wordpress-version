@@ -5,7 +5,7 @@ phpunit tests for specific WordPress version:
 
 ```
 class My_Test_Case extends WP_UnitTestCase {
-	use use StephenHarris\PHPUnit\RequiresWordPressVersion;
+	use StephenHarris\PHPUnit\RequiresWordPressVersion;
 
 }
 ```
@@ -51,7 +51,7 @@ Alternativevely you can directly edit your composer.json by adding:
 }
 ```
 
-### Setting up you test cases
+### Setting up your test cases
 
 To use, simply add the `use` statement for the provided trait to your test case:
 
@@ -71,6 +71,24 @@ class My_Test_Case extends WP_UnitTestCase {
 	use StephenHarris\PHPUnit\RequiresWordPressVersion {
 		checkRequirements as checkWordPressVersionRequirements;
   }
+
+	function checkRequirements() {
+		$this->checkWordPressVersionRequirements();
+
+		//... your checkRequirements() method here
+	}
+
+}
+```
+
+If you are using multiple traits with the `checkRequirements()` method, then you will
+need to resolve the conflicts using aliases:
+
+```
+class My_Test_Case extends WP_UnitTestCase {
+	use StephenHarris\PHPUnit\RequiresWordPressVersion {
+		checkRequirements as checkWordPressVersionRequirements;
+	}
 	use Some\Other\checkRequirementsTrait {
 		checkRequirements as checkSomeOtherRequirements;
 	}
@@ -83,12 +101,7 @@ class My_Test_Case extends WP_UnitTestCase {
 }
 ```
 
-If you are using multiple traits with the `checkRequirements()` method, then you will
-need to resolve the conflicts using aliases:
-
-
 ## Examples
-
 
 ```
 class My_Test extends My_Test_Case {
